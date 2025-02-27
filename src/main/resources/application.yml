@@ -1,0 +1,59 @@
+greeting:
+  message: "hello"
+
+external-api:
+  url: "http://bmw.external.com"
+
+quarkus:
+  rest-client:
+    external-api:
+      url: ${external-api.url}
+  http:
+    test-port: 8080
+    cors:
+      ~: true
+      origins: /.*/
+  log:
+    category:
+      "io.quarkus.category":
+        - level: DEBUG
+    level: INFO
+    console:
+      json: false
+      format: "%d{HH:mm:ss} %-5p request.id=%X{request.id} - request.path=%X{request.path}: [%c{2.}] (%t) %s%n"
+  datasource:
+    db-kind: postgresql
+    devservices:
+      enabled: true
+      reuse: false
+      image-name: "postgres:latest"
+      container-env:
+        "POSTGRES_DB": "workstation"
+        "POSTGRES_USER": "postgres"
+        "PASSWORD": "postgres"
+      port: 5433
+      volumes:
+        "db/init-db": "/docker-entrypoint-initdb.d"
+      db-name: "workstation"
+      username: "postgres"
+      password: "postgres"
+    jdbc:
+      url: jdbc:postgresql://localhost:5433/workstation
+      initial-size: 2
+      min-size: 2
+      max-size: 5
+  liquibase:
+    migrate-at-start: true
+    search-path:
+      - "db/"
+    change-log: "db/changeLog.xml"
+
+hibernate-orm:
+  packages: com.ctw.workstation
+  validate-in-dev-mode: false
+  database:
+    generation: none
+  log:
+    sql: ${hibernate_orm_log_sql:false}
+
+
