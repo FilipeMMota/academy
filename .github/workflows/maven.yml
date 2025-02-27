@@ -24,4 +24,4 @@ jobs:
 
     - uses: FilipeMMota/academy/.github/actions/maven_build@main
 
-    -uses: FilipeMMota/academy/.github/actions/docker_build@main
+    - uses: FilipeMMota/academy/.github/actions/docker_build@main
