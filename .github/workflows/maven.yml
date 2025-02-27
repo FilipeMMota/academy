@@ -24,7 +24,4 @@ jobs:
 
     - uses: FilipeMMota/academy/.github/actions/maven_build@main
 
-    - name: Build Docker Image
-      run:  docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
-    - name: List Docker images
-      run: docker images | grep academy
+    -uses: FilipeMMota/academy/.github/actions/docker_build@main
