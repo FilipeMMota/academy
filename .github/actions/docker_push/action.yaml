@@ -15,7 +15,7 @@ runs:
       with:
         username: ${{ inputs.docker_username }}
         password: ${{ inputs.docker_token }}
-  
+
     - name: Push Docker Image
       run: docker push ${{ env.DOCKER_IMAGE_NAME }}
       shell: bash

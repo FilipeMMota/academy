@@ -27,7 +27,7 @@ jobs:
     - uses: FilipeMMota/academy/.github/actions/docker_build@main
       with:
         path_dockerfile: src/main/docker/Dockerfile.jvm
-        image_name: FilipeMMota/academy
+        image_name: filipemota781/academy
         tag_name: v1
 
     - uses: FilipeMMota/academy/.github/actions/docker_push@main
