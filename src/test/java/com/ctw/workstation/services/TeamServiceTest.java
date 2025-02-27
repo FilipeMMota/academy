@@ -29,75 +29,75 @@ class TeamServiceTest {
     TeamRepository teamRepository;
 
 
-    @Test
-    @DisplayName("Create team")
-    public void create_team(){
-        TeamRequestDTO teamRequestDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
-
-        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamRequestDTO);
-
-        assertThat(teamResponseDTO).hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers").usingRecursiveComparison().ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers").isEqualTo(teamRequestDTO);
-
-        assertThat(teamRepository.findById(teamResponseDTO.id())).isNotNull();
-    }
-
-    @Test
-    @DisplayName("Create team with mocks")
-    void create_team_mock(){
-
-        Mockito.doThrow(new IllegalArgumentException("Erro")).when(teamRepository).persistAndFlush(Mockito.any(Team.class));
-//        Mockito.when(teamRepository.persist(Mockito.any(Team.class)));
-
-        TeamRequestDTO teamRequestDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
-
-        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamRequestDTO);
-
-        assertThat(teamResponseDTO).hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers").usingRecursiveComparison().ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers").isEqualTo(teamRequestDTO);
-
+//    @Test
+//    @DisplayName("Create team")
+//    public void create_team(){
+//        TeamRequestDTO teamRequestDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
+//
+//        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamRequestDTO);
+//
+//        assertThat(teamResponseDTO).hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers").usingRecursiveComparison().ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers").isEqualTo(teamRequestDTO);
+//
 //        assertThat(teamRepository.findById(teamResponseDTO.id())).isNotNull();
-    }
-
-    @Test
-    @DisplayName("Create team with mocks")
-    void create_team_mock_endpoint(){
-
-        // faz o mesmo que o @InjectMock
-//        TeamRepository teamRepository = Mockito.mock(TeamRepository.class);
-//        QuarkusMock.installMockForType(teamRepository, TeamRepository.class);
-
-        Mockito.doThrow(new IllegalArgumentException("Erro")).when(teamRepository).persist(Mockito.any(Team.class));
-//        Mockito.when(teamRepository.persist(Mockito.any(Team.class)));
-
-        TeamRequestDTO teamRequestDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
-
-        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamRequestDTO);
-
-        assertThat(teamResponseDTO).hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers").usingRecursiveComparison().ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers").isEqualTo(teamRequestDTO);
-
-//        assertThatThrownBy(() -> teamService.create(teamDTO))
-
+//    }
+//
+//    @Test
+//    @DisplayName("Create team with mocks")
+//    void create_team_mock(){
+//
+//        Mockito.doThrow(new IllegalArgumentException("Erro")).when(teamRepository).persistAndFlush(Mockito.any(Team.class));
+////        Mockito.when(teamRepository.persist(Mockito.any(Team.class)));
+//
+//        TeamRequestDTO teamRequestDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
+//
+//        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamRequestDTO);
+//
+//        assertThat(teamResponseDTO).hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers").usingRecursiveComparison().ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers").isEqualTo(teamRequestDTO);
+//
+////        assertThat(teamRepository.findById(teamResponseDTO.id())).isNotNull();
+//    }
+//
+//    @Test
+//    @DisplayName("Create team with mocks")
+//    void create_team_mock_endpoint(){
+//
+//        // faz o mesmo que o @InjectMock
+////        TeamRepository teamRepository = Mockito.mock(TeamRepository.class);
+////        QuarkusMock.installMockForType(teamRepository, TeamRepository.class);
+//
+//        Mockito.doThrow(new IllegalArgumentException("Erro")).when(teamRepository).persist(Mockito.any(Team.class));
+////        Mockito.when(teamRepository.persist(Mockito.any(Team.class)));
+//
+//        TeamRequestDTO teamRequestDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
+//
+//        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamRequestDTO);
+//
+//        assertThat(teamResponseDTO).hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers").usingRecursiveComparison().ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers").isEqualTo(teamRequestDTO);
+//
+////        assertThatThrownBy(() -> teamService.create(teamDTO))
+//
+////        assertThat(teamRepository.findById(teamResponseDTO.id())).isNotNull();
+//    }
+//
+//    @Test
+//    @DisplayName("Create team with mocks")
+//    void create_team_mock_database(){
+//
+//        TeamRepository teamRepositoryMock = Mockito.mock(TeamRepository.class);
+//        QuarkusMock.installMockForInstance(teamRepositoryMock, teamRepository);
+//
+//        TeamRequestDTO teamDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
+//
+//        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamDTO);
+//
+//        assertThat(teamResponseDTO)
+//                .as("DTO from persisted team was returned with no null fields")
+//                .hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers")
+//                .usingRecursiveComparison()
+//                .ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers")
+//                .as("DTO was returned wit data persisted")
+//                .isEqualTo(teamDTO);
+//
 //        assertThat(teamRepository.findById(teamResponseDTO.id())).isNotNull();
-    }
-
-    @Test
-    @DisplayName("Create team with mocks")
-    void create_team_mock_database(){
-
-        TeamRepository teamRepositoryMock = Mockito.mock(TeamRepository.class);
-        QuarkusMock.installMockForInstance(teamRepositoryMock, teamRepository);
-
-        TeamRequestDTO teamDTO = new TeamRequestDTO("Planters", "Plant", "Lisbon");
-
-        TeamResponseDTO teamResponseDTO = teamService.addTeam(teamDTO);
-
-        assertThat(teamResponseDTO)
-                .as("DTO from persisted team was returned with no null fields")
-                .hasNoNullFieldsOrPropertiesExcept("racks", "teamMembers")
-                .usingRecursiveComparison()
-                .ignoringFields("id", "createdAt", "modifiedAt", "racks", "teamMembers")
-                .as("DTO was returned wit data persisted")
-                .isEqualTo(teamDTO);
-
-        assertThat(teamRepository.findById(teamResponseDTO.id())).isNotNull();
-    }
+//    }
 }

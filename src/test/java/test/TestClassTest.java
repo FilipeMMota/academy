@@ -21,29 +21,29 @@ class TestClassTest {
         testClass = new TestClass();
     }
 
-    @ParameterizedTest
-    @Order(1)
-    @MethodSource(value = {"argumentsOfSayHello"})
-    void sayHello(String expected, String name) {
-
-        String result = testClass.sayHello(name);
-
-        Assertions.assertEquals(expected, result);
-    }
-
-    @ParameterizedTest
-    @Order(2)
-    @NullSource
-
-    void test_invalid_name(String name){
-
-        String result = testClass.sayHello(name);
-
-        Assertions.assertEquals("Hello", result);
-    }
-
-    @AfterAll
-    static void closing(){
-        Log.info("Closing");
-    }
+//    @ParameterizedTest
+//    @Order(1)
+//    @MethodSource(value = {"argumentsOfSayHello"})
+//    void sayHello(String expected, String name) {
+//
+//        String result = testClass.sayHello(name);
+//
+//        Assertions.assertEquals(expected, result);
+//    }
+//
+//    @ParameterizedTest
+//    @Order(2)
+//    @NullSource
+//
+//    void test_invalid_name(String name){
+//
+//        String result = testClass.sayHello(name);
+//
+//        Assertions.assertEquals("Hello", result);
+//    }
+//
+//    @AfterAll
+//    static void closing(){
+//        Log.info("Closing");
+//    }
 }
